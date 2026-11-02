@@ -9,3 +9,54 @@ struct Book {
 
 struct Book books[50];
 int count = 3;
+void addBook() {
+    if (count == 50) {
+        printf("\nLibrary is full!\n");
+        return;
+    }
+
+    books[count].id = count + 1;
+
+    printf("Enter book title: ");
+    scanf(" %49[^\n]", books[count].title);
+
+    printf("Enter author name: ");
+    scanf(" %49[^\n]", books[count].author);
+
+    printf("Enter available copies: ");
+    scanf("%d", &books[count].available);
+
+    count++;
+    printf("\nBook added successfully!\n");
+}
+
+void showBooks() {
+    int i;
+
+    printf("\nID   TITLE                 AUTHOR              COPIES\n");
+    printf("-----------------------------------------------------\n");
+
+    for (i = 0; i < count; i++) {
+        printf("%-4d %-21s %-19s %d\n",
+               books[i].id, books[i].title,
+               books[i].author, books[i].available);
+    }
+}
+
+void searchBook() {
+    int id, i;
+
+    printf("Enter book ID: ");
+    scanf("%d", &id);
+
+    for (i = 0; i < count; i++) {
+        if (books[i].id == id) {
+            printf("\nTitle: %s\n", books[i].title);
+            printf("Author: %s\n", books[i].author);
+            printf("Available copies: %d\n", books[i].available);
+            return;
+        }
+    }
+
+    printf("\nBook not found!\n");
+}
